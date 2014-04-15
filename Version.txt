@@ -1,0 +1,41 @@
+
+TYMO 1.1.4-11/10/2012:
+
+Antes se empleaba la macro  WAIT_BEFORE_RETRY = LPL_DEF_LOCAL_WAKEUP * 2 en el componente ForwardingEngineM. Generaba error en la estación base cuando solicitaba ruta puesto que la estación base tiene definido esa macro con valor cero en el makefile de la aplicación. Ahora empleamos  WAIT_BEFORE_RETRY = LPL_DEF_REMOTE_WAKEUP * 2 el cual es distinto de cero. En el caso de que no se emplee LPL ese valor es 100.
+ Ahora limitamos el número máximo de saltos de 10 a 5. Evitamos bucles infinitos.
+#ifndef DYMO_HOPLIMIT
+#define DYMO_HOPLIMIT 5
+#endif
+
+TYMO 1.1.3 02/10/2012:
+Cambios importantes en componentes: ForwardingEngineM,  MHEngineM. Errores encontrados asociados a los mecanismos de retransmisión de mensajes. Tras una retransmisión, no se envía el mensaje con ack.
+
+Cuando no tenía ruta y expiraba el timer para volver a buscar ruta, ya no enviaba el mensaje con ack y por tanto eso era un problema.
+
+TYMO 1.1.2 04/06/2012
+
+Se añaden sentencias de compilación para poder emplearlo sin ser necesario tener activado el modo LOW POWER.
+
+
+TYMO 1.1.1 26/04/2012
+
+Se ajustan los siguientes parámetros referentes a la tabla de enrutamiento:
+
+#ifndef MAX_TABLE_SIZE
+#define MAX_TABLE_SIZE 30
+#endif
+
+#ifndef DYMO_HOPLIMIT
+#define DYMO_HOPLIMIT 20
+#endif
+
+
+
+
+TYMO 1.1.0 26/01/2012
+
+Se elimina el componente LedC y las llamadas a sus comandos empleadas en la fase de depuración del protocolo de red.
+
+Ver TFM para ver los cambios introducidos por Antonio.
+
+
